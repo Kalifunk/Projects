@@ -1,60 +1,69 @@
-
-img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-  
-    display: block;
-    margin: 0 auto;
-  }
-
-html, body, section  {
+html,
+body,
+section {
     height: 100%;
-    font-size : 10px;
-  }
- 
-  
+    font-size: 10px;
+    margin: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 .tweet-container {
     position: absolute;
-    top:35%;
-    left:50%;
+    top: 35%;
+    left: 50%;
     width: 100px;
     height: 50px;
     margin-left: -50px; /* margin is -0.5 * dimension */
-    margin-top: -25px; 
+    margin-top: -25px;
     text-align: center;
     font-family: Helvetica;
-    color:greenyellow;
+    color: greenyellow;
     font-size: 3rem;
-    
 }
 
-
-  
-  /* Pattern styles */
-  .container {
+/* Pattern styles */
+.container {
     display: flex;
-  }
-  
-  .left-half {
-    flex: 1;    
-  }
-  
-  .right-half {
-    flex: 1;    
-  }
+    flex-flow: row nowrap;
+}
 
-  body {
-    padding: 20px;
-  }
-  button {
-    margin-top: 20px;
+.left-half {
+    background-image: url("images/Donald_Trump.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 0;
+    overflow: hidden;
+    background-position: 50%;
+    text-align: center;
+}
+
+.right-half {
+    background-image: url("images/Hillary_Clinton.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 0;
+
+    overflow: hidden;
+    text-align: center;
+    background-position: 50%;
+}
+
+.button-wrapper {
+    position: relative;
+    top: 70%;
+}
+
+button {
     line-height: 60px;
     font-weight: bold;
+
     padding: 0 40px;
     background: salmon;
     border: none;
-  }
-  button:hover {
+}
+button:hover {
     background: lightsalmon;
-  }
+}
