@@ -25,7 +25,7 @@ function getTweetOwner(tweet) {
         }
     }
 }
-// 3. Add event handler
+
 document.getElementById("btn1").addEventListener("click", function () {
     //pickRandomTweet(tweets);
 
