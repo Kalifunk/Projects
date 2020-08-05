@@ -15,7 +15,7 @@ const celebrities = {
 
 let celebrityHashmap = {
     "Donald-Trump": {
-        imageUrl: "images/Donald_trump.jpg",
+        imageUrl: "images/Donald_Trump.jpg",
         Tweets: ["Trump1", "Trump2", "Trump3"],
     },
     "Hillary-Clinton": {
