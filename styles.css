@@ -27,7 +27,7 @@ h1 {
     left: 40%;
     width: 400px;
     height: 300px;
-
+    padding-top: 20px;
     color: black;
     font-size: 2rem;
     border-radius: 25px;
@@ -37,12 +37,12 @@ h1 {
 }
 
 #tweet {
-    padding-top: 15px;
-    display: inline-block;
-    max-height: 100%;
-    max-width: 100%;
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    max-width: 100%;
 }
 
 #tweet:before,
