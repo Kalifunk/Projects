@@ -48,6 +48,7 @@ h1 {
 #tweet:before,
 #tweet:after {
     content: '"';
+    font-size: 3rem;
 }
 
 /* Pattern styles */
