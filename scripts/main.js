@@ -1,19 +1,4 @@
-/*
-const tweets = [
-    "Test tweet1",
-    "Test tweet2",
-    "Test tweet3",
-    "Test tweet4",
-    "Test tweet5",
-];
-
-const celebrities = {
-    Donald_Trump: ["Test tweet1", "Test tweet2", "Test tweet3"],
-    Hillary_Clinton: ["Test tweet4", "Test tweet5"],
-};
-*/
-
-let celebrityHashmap = {
+const CELEBRITY_HASHMAP = {
     "Donald-Trump": {
         imageUrl: "images/Donald_Trump.jpg",
         Tweets: ["Trump1", "Trump2", "Trump3"],
@@ -37,45 +22,43 @@ function shuffle(a) {
 }
 
 function getRandomCelebrities() {
-    picked_celebrities = [];
-    let keyArray = Object.keys(celebrityHashmap);
+    let keyArray = Object.keys(CELEBRITY_HASHMAP);
     keyArray = shuffle(keyArray);
-    for (var i = 0; i < 2; ++i) {
-        let current = keyArray[i];
-        picked_celebrities.push(current);
-    }
-    return picked_celebrities;
+    return keyArray.slice(0, 2);
 }
 
-two_celebrities = getRandomCelebrities(celebrityHashmap);
+function setCelebrity(index, displayTweet, side, random_tweet) {
+    const celebrityName = two_celebrities[index];
+    const celebrityImgUrl = CELEBRITY_HASHMAP[celebrityName].imageUrl;
+    const celebrityNameFormatted = celebrityName.replace("-", " ");
+
+    document.getElementById(
+        side
+    ).style.backgroundImage = `url(${celebrityImgUrl})`;
+
+    if (side === "left-half") {
+        document.getElementById("btn1").value = celebrityName;
+        document.getElementById("btn1").innerHTML = celebrityNameFormatted;
+    } else {
+        document.getElementById("btn2").value = celebrityName;
+        document.getElementById("btn2").innerHTML = celebrityNameFormatted;
+    }
+
+    if (displayTweet) {
+        document.getElementById("tweet").innerHTML = random_tweet;
+    }
+}
 
 function displayCelebrity(index, displayThisTweet, isLeftElseRight) {
     const celebrityName = two_celebrities[index];
-    const celebrityImgUrl = celebrityHashmap[celebrityName].imageUrl;
-    const celebrityTweets = celebrityHashmap[celebrityName].Tweets;
-    const celebrityNameFormatted = celebrityName.replace("-", " ");
+    const celebrityTweets = CELEBRITY_HASHMAP[celebrityName].Tweets;
 
     let randomTweet =
         celebrityTweets[Math.floor(Math.random() * celebrityTweets.length)];
-
     if (isLeftElseRight) {
-        document.getElementById(
-            "left-half"
-        ).style.backgroundImage = `url(${celebrityImgUrl}`;
-        document.getElementById("btn1").value = celebrityName;
-        document.getElementById("btn1").innerHTML = celebrityNameFormatted;
-        if (displayThisTweet) {
-            document.getElementById("tweet").innerHTML = randomTweet;
-        }
+        setCelebrity(index, displayThisTweet, "left-half", randomTweet);
     } else {
-        document.getElementById(
-            "right-half"
-        ).style.backgroundImage = `url(${celebrityImgUrl}`;
-        document.getElementById("btn2").value = celebrityName;
-        document.getElementById("btn2").innerHTML = celebrityNameFormatted;
-        if (displayThisTweet) {
-            document.getElementById("tweet").innerHTML = randomTweet;
-        }
+        setCelebrity(index, displayThisTweet, "right-half", randomTweet);
     }
     if (displayThisTweet) {
         return randomTweet;
@@ -85,72 +68,59 @@ function displayCelebrity(index, displayThisTweet, isLeftElseRight) {
 }
 
 function pickSide() {
-    let decider = null;
-    let side_picked = Math.round(Math.random());
-
-    if (side_picked) {
-        /*right side */
-        decider = false;
-    } else {
-        decider = true;
-    }
-    return decider;
+    return Math.random() >= 0.5 ? true : false;
 }
 
-let isLeftElseRight = pickSide();
+function addCorrectMarker(isRightElseWrong) {
+    let img = document.createElement("img");
+    if (isRightElseWrong) {
+        img.src = "images/gameround/correct_tick.png";
+        img.id = "correct-img";
+    } else {
+        img.src = "images/gameround/incorrect-cross.jpg";
+        img.id = "incorrect-img";
+    }
+    var src = document.getElementById("marker");
+    src.appendChild(img);
+}
 
-displayCelebrity(0, true, isLeftElseRight);
-displayCelebrity(1, false, !isLeftElseRight);
+function removeMarker(isRightElseWrong) {
+    if (isRightElseWrong) {
+        var image = document.getElementById("correct-img");
+    } else {
+        var image = document.getElementById("incorrect-img");
+    }
+    image.parentNode.removeChild(image);
+}
 
-/*
-    let randomTweet = tweets[Math.floor(Math.random() * tweets.length)];
-    document.getElementById("tweet").innerHTML = randomTweet;
-    return randomTweet;
-    */
+function randomAssign() {
+    isLeftElseRight = pickSide();
+    two_celebrities = getRandomCelebrities(CELEBRITY_HASHMAP);
+    displayCelebrity(0, true, isLeftElseRight);
+    displayCelebrity(1, false, !isLeftElseRight);
+}
 
 function updateButton(btn) {
     document.getElementById(btn).addEventListener("click", function () {
-        //pickRandomTweet(tweets);
-
         if (document.getElementById(btn).value == two_celebrities[0]) {
-            alert("You guessed correctly!");
-            isLeftElseRight = pickSide();
-            two_celebrities = getRandomCelebrities(celebrityHashmap);
-            displayCelebrity(0, true, isLeftElseRight);
-            displayCelebrity(1, false, !isLeftElseRight);
+            addCorrectMarker(true);
+            setTimeout(() => {
+                removeMarker(true);
+                randomAssign();
+            }, 1000);
         } else {
-            alert("You guessed incorrectly!");
-            isLeftElseRight = pickSide();
-            two_celebrities = getRandomCelebrities(celebrityHashmap);
-            displayCelebrity(0, true, isLeftElseRight);
-            displayCelebrity(1, false, !isLeftElseRight);
+            addCorrectMarker(false);
+            setTimeout(() => {
+                removeMarker(false);
+                randomAssign();
+            }, 1000);
         }
     });
 }
 
+two_celebrities = getRandomCelebrities(CELEBRITY_HASHMAP);
+let isLeftElseRight = pickSide();
+displayCelebrity(0, true, isLeftElseRight);
+displayCelebrity(1, false, !isLeftElseRight);
 updateButton("btn1");
 updateButton("btn2");
-/*
-document.getElementById("btn1").addEventListener("click", function () {
-    //pickRandomTweet(tweets);
-
-    var tweeter = getTweetOwner(rt);
-    if (document.getElementById("btn1").value == tweeter) {
-        alert("You guessed correctly!");
-    } else {
-        alert("You guessed incorrectly!");
-    }
-    rt = pickRandomTweet(tweets);
-});
-
-document.getElementById("btn2").addEventListener("click", function () {
-    //pickRandomTweet(tweets);
-    var tweeter = getTweetOwner(rt);
-    if (document.getElementById("btn2").value == tweeter) {
-        alert("You guessed correctly!");
-    } else {
-        alert("You guessed incorrectly!");
-    }
-    rt = pickRandomTweet(tweets);
-});
-*/

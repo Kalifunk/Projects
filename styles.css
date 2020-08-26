@@ -15,12 +15,24 @@ h1 {
     left: 50%;
     width: 400px;
     margin-left: -200px;
+    text-align: center;
 }
 * {
     margin: 0px;
     box-sizing: border-box;
     padding: 0px;
     font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+}
+
+#marker {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    top: 60%;
+}
+
+#marker img {
+    width: 200px;
 }
 
 .tweet-container {
