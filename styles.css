@@ -46,20 +46,21 @@ h1 {
     height: 300px;
     margin-left: -200px;
     margin-top: -150px;
-    padding-top: 20px;
+    padding-top: 12px;
     color: black;
     font-size: 2rem;
     border-radius: 25px;
     border: 1px solid goldenrod;
     background-color: rgb(248, 248, 255);
     opacity: 0.8;
+    max-width: 100%;
 }
 
 #tweet {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* number of lines to show */
+    -webkit-line-clamp: 7; /* number of lines to show */
     -webkit-box-orient: vertical;
     max-width: 100%;
 }
@@ -119,6 +120,7 @@ button:hover {
     }
     .tweet-container {
         top: 60%;
+        height: 220px;
     }
 }
 
