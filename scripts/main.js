@@ -133,7 +133,7 @@ function addCorrectMarker(isRightElseWrong) {
         img.src = "images/gameround/correct_tick.png";
         img.id = "correct-img";
     } else {
-        img.src = "images/gameround/incorrect-cross.jpg";
+        img.src = "images/gameround/incorrect-cross.png";
         img.id = "incorrect-img";
     }
     var src = document.getElementById("marker");
