@@ -158,20 +158,23 @@ function randomAssign() {
 
 function updateButton(btn) {
     document.getElementById(btn).addEventListener("click", function () {
-        document.getElementById(btn).disabled = true;
+        document.getElementById("btn1").disabled = true;
+        document.getElementById("btn2").disabled = true;
         if (document.getElementById(btn).value == two_celebrities[0]) {
             addCorrectMarker(true);
             setTimeout(() => {
                 removeMarker(true);
+                document.getElementById("btn1").disabled = false;
+                document.getElementById("btn2").disabled = false;
                 randomAssign();
-                document.getElementById(btn).disabled = false;
             }, 1000);
         } else {
             addCorrectMarker(false);
             setTimeout(() => {
                 removeMarker(false);
+                document.getElementById("btn1").disabled = false;
+                document.getElementById("btn2").disabled = false;
                 randomAssign();
-                document.getElementById(btn).disabled = false;
             }, 1000);
         }
     });
