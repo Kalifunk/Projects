@@ -148,6 +148,14 @@ button:hover {
     color: white;
 }
 
+#score {
+    position: absolute;
+    top: 75vh;
+    left: 50vh;
+    font-size: 200px;
+    color: green;
+}
+
 @media screen and (max-width: 700px) {
     .container {
         flex-direction: column;

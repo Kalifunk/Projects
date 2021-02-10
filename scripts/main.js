@@ -69,6 +69,8 @@ const CELEBRITY_HASHMAP = {
     },
 };
 
+let player_score = 0
+
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -156,11 +158,17 @@ function randomAssign() {
     displayCelebrity(1, false, !isLeftElseRight);
 }
 
+function clearBox(elementID)
+{
+    document.getElementById(elementID).innerHTML = "";
+}
+
 function updateButton(btn) {
     document.getElementById(btn).addEventListener("click", function () {
         document.getElementById("btn1").disabled = true;
         document.getElementById("btn2").disabled = true;
         if (document.getElementById(btn).value == two_celebrities[0]) {
+            player_score += 1;
             addCorrectMarker(true);
             setTimeout(() => {
                 removeMarker(true);
@@ -169,11 +177,15 @@ function updateButton(btn) {
                 randomAssign();
             }, 1000);
         } else {
+            document.getElementById("score").innerHTML += `<p>Score is ${player_score} <p>`;
+            player_score = 0;
             addCorrectMarker(false);
             setTimeout(() => {
                 removeMarker(false);
+                clearBox("score");
                 document.getElementById("btn1").disabled = false;
                 document.getElementById("btn2").disabled = false;
+
                 randomAssign();
             }, 1000);
         }
